@@ -30,12 +30,13 @@ with the name of the continent or region to which each country belongs.
 }
 \note{
 Supports the following coding schemes: Correlates of War character,
+  Gleditsch & Ward (1999) character, Gleditsch & Ward (1999) numeric,
   CoW-numeric, ISO3-character, ISO3-numeric, ISO2-character, IMF numeric, International
   Olympic Committee, FIPS 10-4, FAO numeric, United Nations numeric,
   World Bank character, official English short country names (ISO), continent, region.
 
   The following strings can be used as arguments for \code{origin} or
-  \code{destination}: "cowc", "cown", "iso3c", "iso3n", "iso2c", "imf",
+  \code{destination}: "cowc", "cown", "iso3c", "iso3n", "iso2c", "imf", "gwn", "gwc",
   "fips104", "fao", "ioc", "un", "wb", "country.name".  The following strings can be
   used as arguments for \code{destination} \emph{only}:  "continent", "region",
   "eu28", "ar5"
