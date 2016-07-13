@@ -21,6 +21,7 @@ gw_set <- gwcodes %>%
 countrycode_data <- countrycode_data %>%
   left_join(gw_set, by = c("cown" = "gwn"))
 
+# check which ones are different
 countrycode_data %>%
   filter(cowc != gwc) 
 
