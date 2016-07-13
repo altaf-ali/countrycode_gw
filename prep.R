@@ -38,7 +38,7 @@ countrycode_data <- countrycode_data %>%
   left_join(missing_data, by = c("country.name" = "gw_country")) %>%
   mutate(gwn = ifelse(is.na(gwn), cown, gwn),
          gwc = ifelse(is.na(gwc.x), gwc.y, gwc.x)) %>%
-  select(-c(gwc.x, gwc.y))
+  select(country.name, cowc, cown, gwc, gwn, iso3c, iso3n, iso2c, fao, fips105, imf, ioc, un, wb, regex, continent, region, eu28, ar5)
   
 save(countrycode_data, file='data/countrycode_data.rda')
 
