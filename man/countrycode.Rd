@@ -2,48 +2,25 @@
 % Please edit documentation in R/countrycode.R
 \name{countrycode}
 \alias{countrycode}
-\title{Converts long country names into one of many different coding schemes.
-Translates from one scheme to another. Converts country name or coding
-scheme to the official short English country name. Creates a new variable
-with the name of the continent or region to which each country belongs.}
+\title{Convert Country Codes}
 \usage{
-countrycode(sourcevar, origin, destination, warn = TRUE, nomatch = NA,
-  custom_dict = NULL, custom_match = NULL, origin_regex = FALSE)
+countrycode(sourcevar, origin, destination, warn = FALSE, dictionary = NULL)
 }
 \arguments{
-\item{sourcevar}{Vector which contains the codes or country names to be
-converted (character or factor)}
+\item{sourcevar}{Vector which contains the codes or country names to be converted}
 
-\item{origin}{Coding scheme of origin (string such as "iso3c" enclosed in
-quotes ""): type "?codelist" for a list of available codes.}
+\item{origin}{Coding scheme of origin (name enclosed in quotes "")}
 
-\item{destination}{Coding scheme of destination (string such as "iso3c"
-enclosed in quotes ""): type `?codelist` for a list of
-available codes.}
+\item{destination}{Coding scheme of destination (name enclosed in quotes "")}
 
 \item{warn}{Prints unique elements from sourcevar for which no match was found}
 
-\item{nomatch}{When countrycode fails to find a match for the code of
-origin, it fills-in the destination vector with nomatch. The default
-behavior is to fill non-matching codes with NA. If nomatch = NULL,
-countrycode tries to use the origin vector to fill-in missing values in the
-destination vector. nomatch must be either NULL, of length 1, or of the same
-length as sourcevar.}
-
-\item{custom_dict}{A data frame which supplies custom country codes.
+\item{dictionary}{A data frame which supplies custom country codes.
 Variables correspond to country codes, observations must refer to unique
 countries.  When countrycode uses a user-supplied dictionary, no sanity
 checks are conducted. The data frame format must resemble
-countrycode::codelist.}
-
-\item{custom_match}{A named vector which supplies custom origin and
-destination matches that will supercede any matching default result. The name
-of each element will be used as the origin code, and the value of each
-element will be used as the destination code.}
-
-\item{origin_regex}{Logical: When using a custom dictionary, if TRUE then the
-origin codes will be matched as regex, if FALSE they will be matched exactly.
-When using the default dictionary (dictionary = NULL), origin_regex will be ignored.}
+countrycode::countrycode_data. Custom dictionaries only work with strings
+(no regexes).}
 }
 \description{
 Converts long country names into one of many different coding schemes.
@@ -52,28 +29,21 @@ scheme to the official short English country name. Creates a new variable
 with the name of the continent or region to which each country belongs.
 }
 \note{
-For a complete description of available country codes and languages,
-please read the documentation for the \code{codelist} conversion
-dictionary.  Type: \code{?codelist}.
+Supports the following coding schemes: Correlates of War character,
+  Gleditsch & Ward (1999) character, Gleditsch & Ward (1999) numeric,
+  CoW-numeric, ISO3-character, ISO3-numeric, ISO2-character, IMF numeric, International
+  Olympic Committee, FIPS 10-4, FAO numeric, United Nations numeric,
+  World Bank character, official English short country names (ISO), continent, region.
 
-Panel data (i.e., country-year) can pose particular problems when
-converting codes. For instance, some countries like Vietnam or Serbia go
-through political transitions that justify changing codes over time. This
-can pose problems when using codes from organizations like CoW or Polity IV,
-which produce codes in country-year format. Instead of converting codes
-using the `countrycode` function, we recommend that users use the
-``countrycode::codelist_panel`` data.frame as a base into which they can
-merge their other data. This data.frame includes most relevant code, and is
-already "reconciled" to ensure that each political unit is only represented
-by one row in any given year. From there, it is just a matter of using `R`'s
-`merge` function to combine different datasets which use different codes.
+  The following strings can be used as arguments for \code{origin} or
+  \code{destination}: "cowc", "cown", "iso3c", "iso3n", "iso2c", "imf", "gwn", "gwc",
+  "fips104", "fao", "ioc", "un", "wb", "country.name".  The following strings can be
+  used as arguments for \code{destination} \emph{only}:  "continent", "region",
+  "eu28", "ar5"
 }
 \examples{
-# ISO to Correlates of War
-countrycode(c('USA', 'DZA'), 'iso3c', 'cown')
-# English to ISO
-countrycode('Albania', 'country.name', 'iso3c')
-# German to French
-countrycode('Albanien', 'country.name.de', 'iso.name.fr')
+codes.of.origin <- countrycode::countrycode_data$cowc # Vector of values to be converted
+countrycode(codes.of.origin, "cowc", "iso3c")
 }
 \keyword{countrycode}
+
