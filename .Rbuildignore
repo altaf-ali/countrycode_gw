@@ -1,9 +1,9 @@
 cran-comments.md
-data/countrycode_data.csv
+data/backup.rds
+data/dictionary_static.csv
 data/extra
-Makefile
-prep.R
 README.md
 tests
+dictionary
 ^.*\.Rproj$
 ^\.Rproj\.user$
